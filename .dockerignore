@@ -1,0 +1,37 @@
+# Ignore node modules - they will be installed in the image
+node_modules
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor junk
+.DS_Store
+*.swp
+*.swo
+.idea
+.vscode
+
+# Git and CI
+.git
+.gitignore
+.github
+
+# Env files and secrets (should not be copied into build context)
+.env
+.env.*
+!.env.example
+
+# Docker artefacts
+.dockerignore
+
+# Test and coverage output
+coverage
+*.lcov
+
+# Local build artefacts
+/dist
+/build
+.tmp

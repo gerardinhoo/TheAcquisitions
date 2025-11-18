@@ -1,2 +1,7 @@
 node_modules
+.env.*.neon_local/
+
+# Environment files (do not commit real secrets)
+.env
 .env.*
+!.env.example
