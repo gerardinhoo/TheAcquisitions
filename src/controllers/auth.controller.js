@@ -1,4 +1,4 @@
-import { signupSchema, signInSchema } from '#validations/auth.validations.js';
+import { signupSchema, signInSchema } from '#validations/auth.validation.js';
 import { formatValidationError } from '#utils/format.js';
 import logger from '#config/logger.js';
 import { authenticateUser, createUser } from '#services/auth.service.js';

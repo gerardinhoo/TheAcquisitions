@@ -4,13 +4,14 @@ import logger from '../config/logger.js';
 const JWT_SECRET =
   process.env.JWT_TOKEN || 'token-secret-key-to-be-changed-in-prod';
 
-const JWT_EXPIRES_IN = '5d';
+const JWT_EXPIRES_IN = '1d';
 
 export const jwttoken = {
   sign: payload => {
     try {
+      return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
     } catch (error) {
-      logger.error('Failed to authenticate', error);
+      logger.error('Failed to sign token', error);
       throw new Error('Failed to authenticate token');
     }
   },
@@ -18,7 +19,7 @@ export const jwttoken = {
     try {
       return jwt.verify(token, JWT_SECRET);
     } catch (error) {
-      logger.error('Failed to authenticate token', e);
+      logger.error('Failed to authenticate token', error);
       throw new Error('Failed to authenticate token');
     }
   },
