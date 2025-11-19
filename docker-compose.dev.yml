@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 
 services:
   # Neon Local Proxy for development
@@ -6,10 +6,10 @@ services:
     image: neondatabase/neon_local:latest
     container_name: neon-local
     ports:
-      - "5432:5432"        # Local access if you want to connect from host psql
+      - '5432:5432' # Local access if you want to connect from host psql
     env_file:
       - .env.development
-  
+
   # Node.js Application
   app:
     build:
@@ -24,10 +24,10 @@ services:
     #   # Local Neon HTTP endpoint (matches neon-local service)
     #   NEON_LOCAL_ENDPOINT: http://neon-local:5432/sql
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - neon-local
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: ["npm", "run", "dev"]
+    command: ['npm', 'run', 'dev']
