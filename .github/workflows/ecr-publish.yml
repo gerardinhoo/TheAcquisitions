@@ -1,3 +1,5 @@
+# CI/CD builds, tests, and publishes a Docker image of this Node API to Amazon ECR.
+
 name: Build and Push Docker Image to ECR
 
 on:
