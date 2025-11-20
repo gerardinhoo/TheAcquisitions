@@ -1,18 +1,15 @@
 # ============================
-# 1. Base image
+# 1. Base image (prod deps)
 # ============================
 FROM node:22-alpine AS base
 
 WORKDIR /usr/src/app
-
 ENV NODE_ENV=production
 
-# Install dependencies first (better layer caching)
+# Install ONLY production dependencies
 COPY package*.json ./
 RUN npm ci --omit=dev
 
-# Copy app source
-COPY . .
 
 # ============================
 # 2. Development image
@@ -20,18 +17,16 @@ COPY . .
 FROM node:22-alpine AS dev
 
 WORKDIR /usr/src/app
-
 ENV NODE_ENV=development
 
 COPY package*.json ./
-RUN npm install
+RUN npm ci   # more reliable than npm install
 
 COPY . .
 
 EXPOSE 3000
-
-# Default dev command (overridable in docker-compose)
 CMD ["npm", "run", "dev"]
+
 
 # ============================
 # 3. Production runtime image
@@ -39,11 +34,12 @@ CMD ["npm", "run", "dev"]
 FROM node:22-alpine AS prod
 
 WORKDIR /usr/src/app
-
 ENV NODE_ENV=production
 
-# Only copy node_modules from base (prod deps only)
+# Copy production node_modules from the base stage
 COPY --from=base /usr/src/app/node_modules ./node_modules
+
+# Copy the full app source
 COPY . .
 
 EXPOSE 3000

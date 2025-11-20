@@ -1,15 +1,19 @@
+// src/config/database.js
 import 'dotenv/config';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import pkg from 'pg';
 
-import { neon, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+const { Pool } = pkg;
 
-// In development, route Neon HTTP traffic via Neon Local
-if (process.env.NODE_ENV === 'development') {
-  neonConfig.fetchEndpoint = 'http://neon-local:5432/sql';
-  neonConfig.useSecureWebSocket = false; // Neon Local uses HTTP only, no secure websockets
-  neonConfig.poolQueryViaFetch = true;
+if (!process.env.DATABASE_URL) {
+  throw new Error('DATABASE_URL is not set');
 }
 
-export const sql = neon(process.env.DATABASE_URL);
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // required for Neon in many Node setups
+  },
+});
 
-export const db = drizzle(sql);
+export const db = drizzle(pool);
