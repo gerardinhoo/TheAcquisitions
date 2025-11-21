@@ -7,12 +7,12 @@ const { Pool } = pkg;
 
 let db;
 
-if (process.env.NODE_ENV === "test") {
-  console.warn("Skipping DB setup during tests");
+if (process.env.NODE_ENV === 'test') {
+  console.warn('Skipping DB setup during tests');
   db = { mock: true };
 } else {
   if (!process.env.DATABASE_URL) {
-    throw new Error("DATABASE_URL is not set");
+    throw new Error('DATABASE_URL is not set');
   }
 
   const pool = new Pool({

@@ -1,6 +1,5 @@
 import { jest } from '@jest/globals';
 
-
 jest.unstable_mockModule('pg', () => ({
   Pool: jest.fn(() => ({
     query: jest.fn(),
@@ -9,10 +8,10 @@ jest.unstable_mockModule('pg', () => ({
   })),
 }));
 
+// jest.mock('pg');
 
 import request from 'supertest';
 import app from '#src/app.js';
-
 
 describe('API Endpoints', () => {
   describe('GET /health', () => {
