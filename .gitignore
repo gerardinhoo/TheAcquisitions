@@ -7,3 +7,14 @@ node_modules
 !.env.example
 .env.production
 .env.development
+
+
+#terraform
+terraform.tfvars
+*.auto.tfvars
+.terraform/
+*.tfstate
+*.tfstate.backup
+crash.log
+
+
