@@ -46,19 +46,48 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push image to ECR
+      - name: Build image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          IMAGE_TAG=${GITHUB_SHA::7}
+          echo "Building image $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Push image to ECR (with retry)
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           IMAGE_TAG=${GITHUB_SHA::7}
 
-          echo "Building image $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          echo "Pushing image $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          for i in 1 2 3; do
+            echo "Attempt $i to push image..."
 
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+            if docker push "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"; then
+              echo "Successfully pushed commit-tagged image"
+              break
+            fi
+
+            echo "Failed to push commit-tagged image, retrying in 10s..."
+            sleep 10
+          done
+
+          echo "Pushing latest tag..."
+
+          for i in 1 2 3; do
+            echo "Attempt $i to push :latest..."
+
+            if docker push "$ECR_REGISTRY/$ECR_REPOSITORY:latest"; then
+              echo "Successfully pushed latest image"
+              break
+            fi
+
+            echo "Failed to push latest image, retrying in 10s..."
+            sleep 10
+          done
 
       - name: Output image reference
         env:
