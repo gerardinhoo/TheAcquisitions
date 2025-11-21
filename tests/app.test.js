@@ -1,5 +1,18 @@
+import { jest } from '@jest/globals';
+
+
+jest.unstable_mockModule('pg', () => ({
+  Pool: jest.fn(() => ({
+    query: jest.fn(),
+    connect: jest.fn(),
+    end: jest.fn(),
+  })),
+}));
+
+
 import request from 'supertest';
 import app from '#src/app.js';
+
 
 describe('API Endpoints', () => {
   describe('GET /health', () => {

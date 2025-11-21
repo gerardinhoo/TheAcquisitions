@@ -1,0 +1,4 @@
+{"level":"info","message":"::ffff:127.0.0.1 - - [21/Nov/2025:06:45:19 +0000] \"GET /api HTTP/1.1\" 200 45 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [21/Nov/2025:06:45:19 +0000] \"GET /nonexistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [21/Nov/2025:07:11:58 +0000] \"GET /api HTTP/1.1\" 200 45 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [21/Nov/2025:07:11:58 +0000] \"GET /nonexistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"user-service"}

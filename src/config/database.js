@@ -5,15 +5,22 @@ import pkg from 'pg';
 
 const { Pool } = pkg;
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not set');
+let db;
+
+if (process.env.NODE_ENV === "test") {
+  console.warn("Skipping DB setup during tests");
+  db = { mock: true };
+} else {
+  if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL is not set");
+  }
+
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false },
+  });
+
+  db = drizzle(pool);
 }
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false, // required for Neon in many Node setups
-  },
-});
-
-export const db = drizzle(pool);
+export { db };
