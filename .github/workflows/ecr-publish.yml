@@ -67,6 +67,8 @@ jobs:
           format: 'table'
           severity: 'CRITICAL,HIGH'
           exit-code: '1' # fail the job if CRITICAL/HIGH are found
+          args: '--ignorefile .trivyignore'
+
 
       - name: Push image to ECR (with retry)
         env:
