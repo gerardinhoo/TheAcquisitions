@@ -8,3 +8,5 @@
 {"level":"info","message":"::ffff:127.0.0.1 - - [21/Nov/2025:07:22:53 +0000] \"GET /nonexistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"user-service"}
 {"level":"info","message":"::ffff:127.0.0.1 - - [21/Nov/2025:07:37:41 +0000] \"GET /api HTTP/1.1\" 200 45 \"-\" \"-\"","service":"user-service"}
 {"level":"info","message":"::ffff:127.0.0.1 - - [21/Nov/2025:07:37:41 +0000] \"GET /nonexistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [24/Nov/2025:00:05:28 +0000] \"GET /api HTTP/1.1\" 200 45 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [24/Nov/2025:00:05:28 +0000] \"GET /nonexistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"user-service"}
