@@ -69,7 +69,6 @@ jobs:
           exit-code: '1' # fail the job if CRITICAL/HIGH are found
           args: '--ignorefile .trivyignore'
 
-
       - name: Push image to ECR (with retry)
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
