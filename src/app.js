@@ -7,6 +7,9 @@ import cookieParser from 'cookie-parser';
 import authRoutes from '#routes/auth.routes.js';
 import usersRoutes from '#routes/users.routes.js';
 import securityMiddleware from '#middleware/security-middleware.js';
+import { register } from "#config/metrics/metrics.js";
+import { metricsMiddleware } from "#middleware/metrics.middleware.js";
+
 
 const app = express();
 
@@ -24,6 +27,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(securityMiddleware);
+app.use(metricsMiddleware);
+
 
 app.use(
   morgan('combined', {
@@ -38,6 +43,12 @@ app.get('/', (req, res) => {
 
 app.get('/api', (req, res) => {
   res.status(200).json({ message: 'The Acquisitions API is running' });
+});
+
+app.get("/metrics", async (_req, res) => {
+  res.set("Content-Type", register.contentType);
+  const data = await register.metrics();
+  res.send(data);
 });
 
 app.use('/api/auth', authRoutes);

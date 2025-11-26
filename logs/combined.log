@@ -10,3 +10,12 @@
 {"level":"info","message":"::ffff:127.0.0.1 - - [21/Nov/2025:07:37:41 +0000] \"GET /nonexistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"user-service"}
 {"level":"info","message":"::ffff:127.0.0.1 - - [24/Nov/2025:00:05:28 +0000] \"GET /api HTTP/1.1\" 200 45 \"-\" \"-\"","service":"user-service"}
 {"level":"info","message":"::ffff:127.0.0.1 - - [24/Nov/2025:00:05:28 +0000] \"GET /nonexistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"192.168.65.1 - - [26/Nov/2025:06:14:54 +0000] \"GET /metrics HTTP/1.1\" 200 11255 \"-\" \"curl/8.7.1\"","service":"user-service"}
+{"level":"info","message":"192.168.65.1 - - [26/Nov/2025:06:15:21 +0000] \"GET /metrics HTTP/1.1\" 200 11263 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"user-service"}
+{"level":"info","message":"192.168.65.1 - - [26/Nov/2025:06:15:22 +0000] \"GET /favicon.ico HTTP/1.1\" 404 27 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"user-service"}
+{"level":"info","message":"Hello from The Acquisitions","service":"user-service"}
+{"level":"info","message":"192.168.65.1 - - [26/Nov/2025:06:16:05 +0000] \"GET / HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"user-service"}
+{"level":"info","message":"192.168.65.1 - - [26/Nov/2025:06:16:16 +0000] \"GET /metrics HTTP/1.1\" 200 11265 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"user-service"}
+{"level":"info","message":"192.168.65.1 - - [26/Nov/2025:06:46:18 +0000] \"GET /metrics HTTP/1.1\" 200 11271 \"-\" \"curl/8.7.1\"","service":"user-service"}
+{"level":"info","message":"192.168.65.1 - - [26/Nov/2025:06:58:04 +0000] \"GET /metrics HTTP/1.1\" 200 11278 \"-\" \"curl/8.7.1\"","service":"user-service"}
+{"level":"info","message":"192.168.65.1 - - [26/Nov/2025:07:06:53 +0000] \"GET /metrics HTTP/1.1\" 200 11288 \"-\" \"curl/8.7.1\"","service":"user-service"}
