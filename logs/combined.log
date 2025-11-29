@@ -19,3 +19,10 @@
 {"level":"info","message":"192.168.65.1 - - [26/Nov/2025:06:46:18 +0000] \"GET /metrics HTTP/1.1\" 200 11271 \"-\" \"curl/8.7.1\"","service":"user-service"}
 {"level":"info","message":"192.168.65.1 - - [26/Nov/2025:06:58:04 +0000] \"GET /metrics HTTP/1.1\" 200 11278 \"-\" \"curl/8.7.1\"","service":"user-service"}
 {"level":"info","message":"192.168.65.1 - - [26/Nov/2025:07:06:53 +0000] \"GET /metrics HTTP/1.1\" 200 11288 \"-\" \"curl/8.7.1\"","service":"user-service"}
+{"level":"info","message":"User dela@test.com authenticated successfully","service":"user-service"}
+{"level":"info","message":"User signed in successfully: dela@test.com","service":"user-service"}
+{"level":"info","message":"127.0.0.1 - - [27/Nov/2025:06:28:58 +0000] \"POST /api/auth/sign-in HTTP/1.1\" 200 98 \"-\" \"PostmanRuntime/7.49.1\"","service":"user-service"}
+{"level":"info","message":"User signed out","service":"user-service"}
+{"level":"info","message":"127.0.0.1 - - [27/Nov/2025:06:29:20 +0000] \"POST /api/auth/sign-out HTTP/1.1\" 200 29 \"-\" \"PostmanRuntime/7.49.1\"","service":"user-service"}
+{"level":"info","message":"User signed out","service":"user-service"}
+{"level":"info","message":"127.0.0.1 - - [29/Nov/2025:01:19:19 +0000] \"POST /api/auth/sign-out HTTP/1.1\" 200 29 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"user-service"}

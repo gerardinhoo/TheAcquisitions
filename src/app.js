@@ -9,9 +9,37 @@ import usersRoutes from '#routes/users.routes.js';
 import securityMiddleware from '#middleware/security-middleware.js';
 import { register } from "#config/metrics/metrics.js";
 import { metricsMiddleware } from "#middleware/metrics.middleware.js";
+import { swaggerSpec, swaggerUiInstance } from '#config/swagger.js';
 
 
 const app = express();
+
+/**
+ * @swagger
+ * /health:
+ *   get:
+ *     tags: [Health]
+ *     summary: Health check
+ *     description: Returns service status and uptime.
+ *     responses:
+ *       200:
+ *         description: Service is healthy
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "OK"
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
+ *                 uptime:
+ *                   type: number
+ *                   example: 123.45
+ */
+
 
 app.get('/health', (req, res) => {
   res.status(200).json({
@@ -26,6 +54,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use('/api/docs',
+  swaggerUiInstance.serve,
+  swaggerUiInstance.setup(swaggerSpec)
+ )
 app.use(securityMiddleware);
 app.use(metricsMiddleware);
 
