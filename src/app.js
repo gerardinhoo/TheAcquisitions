@@ -7,10 +7,9 @@ import cookieParser from 'cookie-parser';
 import authRoutes from '#routes/auth.routes.js';
 import usersRoutes from '#routes/users.routes.js';
 import securityMiddleware from '#middleware/security-middleware.js';
-import { register } from "#config/metrics/metrics.js";
-import { metricsMiddleware } from "#middleware/metrics.middleware.js";
+import { register } from '#config/metrics/metrics.js';
+import { metricsMiddleware } from '#middleware/metrics.middleware.js';
 import { swaggerSpec, swaggerUiInstance } from '#config/swagger.js';
-
 
 const app = express();
 
@@ -40,7 +39,6 @@ const app = express();
  *                   example: 123.45
  */
 
-
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
@@ -55,13 +53,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use('/api/docs',
+app.use(
+  '/api/docs',
   swaggerUiInstance.serve,
   swaggerUiInstance.setup(swaggerSpec)
- )
+);
 app.use(securityMiddleware);
 app.use(metricsMiddleware);
-
 
 app.use(
   morgan('combined', {
@@ -78,8 +76,8 @@ app.get('/api', (req, res) => {
   res.status(200).json({ message: 'The Acquisitions API is running' });
 });
 
-app.get("/metrics", async (_req, res) => {
-  res.set("Content-Type", register.contentType);
+app.get('/metrics', async (_req, res) => {
+  res.set('Content-Type', register.contentType);
   const data = await register.metrics();
   res.send(data);
 });

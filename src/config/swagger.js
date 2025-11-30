@@ -21,7 +21,7 @@ const options = {
     ],
   },
   // Tell swagger-jsdoc where to find route files
-  apis: ["./src/**/*.js"],
+  apis: ['./src/**/*.js'],
 };
 
 export const swaggerSpec = swaggerJsdoc(options);

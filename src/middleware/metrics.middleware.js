@@ -1,14 +1,17 @@
-import { httpRequestCounter, httpRequestDuration } from "#config/metrics/metrics.js";
+import {
+  httpRequestCounter,
+  httpRequestDuration,
+} from '#config/metrics/metrics.js';
 
 export function metricsMiddleware(req, res, next) {
   const start = process.hrtime.bigint();
 
-  res.on("finish", () => {
+  res.on('finish', () => {
     const end = process.hrtime.bigint();
     const diffNs = Number(end - start);
     const durationSeconds = diffNs / 1e9;
 
-    const route = req.route?.path || req.path || "unknown";
+    const route = req.route?.path || req.path || 'unknown';
 
     const labels = {
       method: req.method,

@@ -46,7 +46,6 @@ const router = express.Router();
 // GET /users - Get all users (admin only)
 router.get('/', authenticateToken, fetchAllUsers);
 
-
 /**
  * @swagger
  * /api/users/{id}:
@@ -84,7 +83,6 @@ router.get('/', authenticateToken, fetchAllUsers);
 
 // GET /users/:id - Get user by ID (authenticated users only)
 router.get('/:id', authenticateToken, fetchUserById);
-
 
 /**
  * @swagger
