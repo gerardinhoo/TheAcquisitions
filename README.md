@@ -1,26 +1,26 @@
 # TheAcquisitions – Cloud & DevOps Project
 
 ## 🚀 Overview
-**TheAcquisitions** is a fully production‑grade DevOps + Cloud Engineering project showcasing the complete lifecycle of a modern backend application:
+**TheAcquisitions** is a fully production-grade **Cloud + DevOps Engineering project** showcasing the complete lifecycle of a modern backend application:
 
-- Local Node.js development  
-- Containerization with Docker  
-- Vulnerability scanning with **Trivy**  
+- Local Node.js API development  
+- Full containerization using Docker  
+- DevSecOps with **Trivy image scanning**  
 - CI/CD with **GitHub Actions** (build → test → scan → push → deploy)  
-- Deployment to **Amazon Linux EC2** using Docker Compose  
-- API served through an **AWS Application Load Balancer (ALB)**  
-- Observability stack using **Prometheus + Grafana**  
-- API documentation using **Swagger / OpenAPI**  
+- Production deployment to **Amazon Linux EC2**  
+- Traffic served through an **AWS ALB**  
+- Observability with **Prometheus + Grafana**  
+- API documentation via **Swagger / OpenAPI**  
 - PostgreSQL hosted on **Neon.tech**  
-- Full infrastructure diagram included  
+- Full **architecture diagram** included  
 
-This is a **portfolio‑ready, job‑winning project** demonstrating practical cloud deployment, monitoring, automation, and backend engineering.
+This is a **portfolio-ready, job-winning project** demonstrating practical skills in cloud architecture, automation, monitoring, and backend engineering.
 
 ---
 
 # 🏗️ Architecture Diagram
 
-![Architecture](./TheAcquisitions-Cloud-DevOps-Archite-2025-11-29-030219.png)
+![Architecture](./images/theacquisitions-architecture.png)
 
 ---
 
@@ -39,9 +39,6 @@ TheAcquisitions/
 │   ├── index.js
 │   ├── server.js
 │   ├── config/
-│   │   ├── swagger.js
-│   │   ├── logger.js
-│   │   ├── metrics/
 │   ├── controllers/
 │   ├── middleware/
 │   ├── models/
@@ -67,15 +64,15 @@ TheAcquisitions/
 - Node.js (Express)
 - PostgreSQL (Neon)
 - JWT Auth
-- Helmet, CORS, Rate Limits, Arcjet security
+- Helmet, CORS, Arcjet (bot protection)
 
 ### **DevOps & Cloud**
 - Docker & Docker Compose  
 - GitHub Actions CI/CD  
 - Trivy Image Scanning  
-- AWS EC2 (Amazon Linux 2023)  
-- AWS ALB  
-- Amazon ECR (image registry)  
+- Amazon EC2 (Amazon Linux 2023)  
+- Application Load Balancer  
+- Amazon ECR  
 - Prometheus  
 - Grafana  
 
@@ -84,13 +81,9 @@ TheAcquisitions/
 - `theacquisitions_nodejs_active_requests_total`  
 - `theacquisitions_nodejs_eventloop_lag_mean_seconds`  
 
-### **Documentation**
-- Swagger (OpenAPI 3.0)
-- Postman collections
-
 ---
 
-# 🔧 Local Development Setup
+# 🔧 Local Development
 
 ### 1. Clone the repository
 ```bash
@@ -103,202 +96,222 @@ cd TheAcquisitions
 npm install
 ```
 
-### 3. Start local Dev environment
+### 3. Start local development environment
 ```bash
 docker compose -f docker-compose.dev.yml up --build
 ```
 
 ### 4. Access services
-| Service | URL |
-|--------|-----|
-| API | http://localhost:3000 |
-| Swagger Docs | http://localhost:3000/api/docs |
-| Prometheus | http://localhost:9090 |
-| Grafana | http://localhost:3001 |
+| Service       | URL                            |
+|---------------|--------------------------------|
+| API           | http://localhost:3000          |
+| Swagger Docs  | http://localhost:3000/api/docs |
+| Prometheus    | http://localhost:9090          |
+| Grafana       | http://localhost:3001          |
 
 ---
 
 # 🐳 Docker Images
 
-### Build image manually
+### Build image
 ```bash
 docker build -t theacquisitions-app .
 ```
 
-### Run container manually
+### Run container
 ```bash
 docker run -p 3000:3000 theacquisitions-app
 ```
 
 ---
 
-# 🔒 Trivy Vulnerability Scanning
+# 🔒 DevSecOps: Trivy Vulnerability Scanning
 
-### Scan Docker image
+### Run scan
 ```bash
 trivy image theacquisitions-app
 ```
-
-Screenshots:
-
-<!-- - `trivy_scan_1.png`
-- `trivy_scan_2.png` -->
-
-![Trivy Scan](./images/trivy_scan_1.png)
 
 ---
 
 # ⚡ GitHub Actions CI/CD Pipeline
 
-### Pipeline steps:
-1. **Checkout repo**  
-2. **Install dependencies**  
-3. **Run tests & linting**  
-4. **Build Docker image**  
-5. **Run Trivy security scan**  
-6. **Push image to Amazon ECR**  
-7. **SSH into EC2 → pull & restart containers**  
-
-### Workflow File
-Located in `.github/workflows/main.yml`.
-
-Screenshot:
-- `workflow.png`
-- `successful_github_actions.png`
+### Pipeline includes:
+1. Code checkout  
+2. Install dependencies  
+3. Lint + tests  
+4. Docker build  
+5. Trivy vulnerability scan  
+6. Push to ECR  
+7. SSH deploy to EC2  
 
 ---
 
 # ☁️ AWS Deployment (Production)
 
-### Infrastructure:
-- **Amazon Linux EC2**
-- Docker + Docker Compose installed via startup scripts
-- ALB → EC2 Target Group → Node.js Container
-- ECR hosts images built by CI/CD
+### Infrastructure
+- Amazon Linux EC2  
+- Docker + Docker Compose  
+- ALB → Target Group → Container  
+- ECR for image storage  
 
-### Deployment Steps (Automated via CI/CD)
+### Deployment Steps (via CI/CD)
 
-#### 1. SSH into EC2
+#### SSH into EC2
 ```bash
-ssh -i <pem-file> ec2-user@<EC2_PUBLIC_IP>
+ssh -i <pem-file> ec2-user@<public-ip>
 ```
 
-#### 2. Pull updated images from ECR
+#### Pull updated images
 ```bash
-aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin <account>.dkr.ecr.us-east-2.amazonaws.com
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin <acct>.dkr.ecr.us-east-2.amazonaws.com
 docker compose -f docker-compose.prod.yml pull
 ```
 
-#### 3. Restart services
+#### Restart services
 ```bash
 docker compose -f docker-compose.prod.yml up -d
 ```
-
-Screenshots:
-- `ALB_Health_Check_URL_Working.png`
-- `running_docker_compose.png`
-- `ECR_Repository_with_Image_Tags.png`
-- `ECS_Service_Task_Running.png`
 
 ---
 
 # 📊 Monitoring (Prometheus + Grafana)
 
-### Prometheus scrape targets
-```
+### Prometheus scrape job
+```yaml
 - job_name: "theacquisitions-app"
   static_configs:
     - targets: ["app:3000"]
 ```
 
-### Grafana Dashboard
-A custom dashboard was built showing:
-- Uptime (up metric)
-- Active Requests
-- Event Loop Lag
-
-Screenshots:
-- `prometheus_target.png`
-- `prometheus_graph.png`
-- `TheAcquisitions_Monitoring.png`
-
 ---
 
 # 📘 Swagger API Documentation
 
-Available at:
-
+Accessible at:
 ```
 http://localhost:3000/api/docs
 https://<ALB_DNS>/api/docs
 ```
 
-Endpoints include:
-- POST `/api/auth/sign-up`
-- POST `/api/auth/sign-in`
-- POST `/api/auth/sign-out`
-- GET `/api/users`
-- GET `/api/users/{id}`
-- PATCH `/api/users/{id}`
-- DELETE `/api/users/{id}`
-- GET `/health`
+---
 
-Screenshot:
-- `Screenshot_2025-11-28_swagger.png`
+# Screenshots
+
+# 🔒 Trivy Vulnerability Scan
+![Trivy Scan](./images/trivy-scan.png)
 
 ---
 
-# 🧪 Testing
-
-Run all Jest tests:
-
-```bash
-npm test
-```
-
-Supports:
-- Unit tests
-- Integration tests
+# ⚡ GitHub Actions CI/CD
+![Workflow](./images/workflow.png)
+![GitHub Build Success](./images/gha-build-success.png)
 
 ---
 
-# 📦 Environment Variables
+# ☁️ AWS Deployment
 
-Create `.env` using `.env.example`
+### ALB Working Screenshot
+![ALB](./images/alb-working-url-check.png)
 
-```
-NODE_ENV=development
-PORT=3000
-DATABASE_URL=<Neon_DB_URL>
-JWT_SECRET=<your-secret>
-ARCJET_KEY=<your-key>
-```
+### EC2 Docker Compose
+![Docker Compose](./images/docker-compose-prod.png)
+
+### ECR Image Tags
+![ECR](./images/ecr-repos-image-tag.png)
+
+### ECS Metadata
+![ECS](./images/ecs-service-overview.png)
+
+---
+
+# 📊 Monitoring
+
+### Prometheus
+![Prometheus Target](./images/prometheus-target.png)
+![Prometheus Graph](./images/prometheus-graph.png)
+
+### Grafana
+![Monitoring Dashboard](./images/monitoring.png)
+
+---
+
+# 📘 Swagger Docs
+![Swagger Docs](./images/swagger-api-docs.png)
+
+---
+
+# 🚧 Challenges Faced In This Project & How They Have Been Solved
+
+### 1. Docker container unreachable  
+**Cause:** Node bound to `localhost`.  
+**Fix:** `app.listen(PORT, "0.0.0.0")`.
+
+### 2. Port conflicts (3000/9090)  
+**Cause:** Old Prometheus/Grafana services running.  
+**Fix:** Disabled system services.
+
+### 3. ALB requests blocked by Arcjet  
+**Cause:** Bot detection flagged ALB.  
+**Fix:** Allow User-Agent or bypass internal routes.
+
+### 4. ALB health checks failing  
+**Fix:** Move `/health` above middleware + fix Target Group port.
+
+### 5. Prometheus not scraping  
+**Fix:** Corrected service target: `["app:3000"]`.
+
+### 6. Grafana dashboard disappearing  
+**Fix:** Saved + exported dashboards correctly.
+
+### 7. GitHub Actions failing (650MB Terraform folder)  
+**Fix:** Cleanup with `git filter-repo` + updated `.gitignore`.
+
+### 8. Terraform apply failures  
+**Cause:** Wrong provider + missing IAM permissions.  
+**Fix:** Correct provider + added IAM policies.
+
+### 9. ECS task crash  
+**Cause:** Missing `DATABASE_URL`.  
+**Fix:** Added ECS secrets + CloudWatch log group.
+
+### 10. Missing `.env.production` on EC2  
+**Fix:** Uploaded file or used mapped secrets.
+
+### 11. Swagger not rendering  
+**Fix:** Corrected swagger-jsdoc path.
+
+### 12. Security middleware blocking routes  
+**Fix:** Reordered middleware.
+
+### 13. Neon DB connectivity issues  
+**Fix:** Corrected ECS secret mapping.
 
 ---
 
 # 🏁 Conclusion
 
 This project demonstrates:
+
 - Cloud deployment on AWS  
 - CI/CD automation  
-- Docker orchestration  
-- Application monitoring  
-- Production‑grade API with security & documentation  
+- Container orchestration  
+- Monitoring + observability  
+- Secure API development  
+- Real-world troubleshooting  
 
-It’s a **strong portfolio piece** suitable for:
+A strong portfolio project for roles like:  
 - DevOps Engineer  
 - Cloud Engineer  
 - SRE  
-- Backend Engineer  
 - Platform Engineer  
 
 ---
 
 # ⭐ Author
-**Gerard Eklu**  
-DevOps & Cloud Engineer
+**Gerard Eklu** — DevOps & Cloud Engineer
 
 ---
 
 # 📄 License
-MIT  
+MIT

@@ -26,3 +26,6 @@
 {"level":"info","message":"127.0.0.1 - - [27/Nov/2025:06:29:20 +0000] \"POST /api/auth/sign-out HTTP/1.1\" 200 29 \"-\" \"PostmanRuntime/7.49.1\"","service":"user-service"}
 {"level":"info","message":"User signed out","service":"user-service"}
 {"level":"info","message":"127.0.0.1 - - [29/Nov/2025:01:19:19 +0000] \"POST /api/auth/sign-out HTTP/1.1\" 200 29 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"user-service"}
+{"level":"info","message":"Hello from The Acquisitions","service":"user-service"}
+{"level":"info","message":"127.0.0.1 - - [30/Nov/2025:05:21:17 +0000] \"GET / HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"user-service"}
+{"level":"info","message":"127.0.0.1 - - [30/Nov/2025:05:21:20 +0000] \"GET /favicon.ico HTTP/1.1\" 404 27 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36\"","service":"user-service"}
