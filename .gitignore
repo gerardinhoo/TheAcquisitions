@@ -18,3 +18,7 @@ terraform.tfvars
 crash.log
 
 
+INTERVIEW_PREP.md
+
+coverage/
+logs/

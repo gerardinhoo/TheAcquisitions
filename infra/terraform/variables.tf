@@ -24,10 +24,12 @@ variable "container_port" {
 variable "database_url" {
   description = "Postgres connection string"
   type        = string
+  sensitive   = true
 }
 
 variable "arcjet_key" {
   description = "Arcjet API key"
   type        = string
+  sensitive   = true
 }
 

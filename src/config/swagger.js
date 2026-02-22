@@ -11,12 +11,9 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
-        description: 'Local',
-      },
-      {
-        url: 'https://theacquisitions-api-alb-399263603.us-east-2.elb.amazonaws.com',
-        description: 'Production (ALB)',
+        url: process.env.API_BASE_URL || 'http://localhost:3000',
+        description:
+          process.env.NODE_ENV === 'production' ? 'Production' : 'Local',
       },
     ],
   },

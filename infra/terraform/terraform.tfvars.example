@@ -1,0 +1,7 @@
+aws_region     = "us-east-2"
+app_name       = "theacquisitions-api"
+ecr_repo_url   = "<aws-account-id>.dkr.ecr.us-east-2.amazonaws.com/theacquisitions-api"
+container_port = 3000
+
+database_url = "postgresql://neondb_owner:<password>@<your-neon-host>/<database>?sslmode=require"
+arcjet_key   = "ajkey_<your-arcjet-key>"
