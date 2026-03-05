@@ -1,21 +1,15 @@
-# TheAcquisitions – Cloud & DevOps Project
+# TheAcquisitions — AWS CI/CD & Cloud Deployment
 
-## 🚀 Overview
+## Overview
 
-**TheAcquisitions** is a fully production-grade **Cloud + DevOps Engineering project** showcasing the complete lifecycle of a modern backend application:
+End-to-end cloud deployment of a containerized Node.js API on AWS — from GitHub push to production behind an Application Load Balancer with HTTPS. Automated CI/CD pipeline with DevSecOps, full observability stack, and secure infrastructure.
 
-- Local Node.js API development
-- Full containerization using Docker
-- DevSecOps with **Trivy image scanning**
-- CI/CD with **GitHub Actions** (build → test → scan → push → deploy)
-- Production deployment to **Amazon Linux EC2**
-- Traffic served through an **AWS ALB**
-- Observability with **Prometheus + Grafana**
-- API documentation via **Swagger / OpenAPI**
-- PostgreSQL hosted on **Neon.tech**
-- Full **architecture diagram** included
-
-This is a **portfolio-ready, job-winning project** demonstrating practical skills in cloud architecture, automation, monitoring, and backend engineering.
+- CI/CD pipeline via **GitHub Actions** (build → test → scan → push → deploy)
+- Docker containerization with **Trivy** vulnerability scanning
+- Production deployment to **Amazon Linux EC2** behind an **AWS ALB**
+- Observability with **Prometheus + Grafana** (custom app metrics)
+- PostgreSQL on **Neon.tech**, API docs via **Swagger / OpenAPI**
+- Container images stored in **Amazon ECR**
 
 ---
 
@@ -92,7 +86,7 @@ TheAcquisitions/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-user>/TheAcquisitions.git
+git clone https://github.com/gerardinhoo/TheAcquisitions.git
 cd TheAcquisitions
 ```
 
@@ -329,32 +323,17 @@ https://<ALB_DNS>/api/docs
 
 ---
 
-# 🏁 Conclusion
+---
 
-This project demonstrates:
+## Technologies
 
-- Cloud deployment on AWS
-- CI/CD automation
-- Container orchestration
-- Monitoring + observability
-- Secure API development
-- Real-world troubleshooting
-
-A strong portfolio project for roles like:
-
-- DevOps Engineer
-- Cloud Engineer
-- SRE
-- Platform Engineer
+- **AWS** — EC2, ALB, ECR, Target Groups, Security Groups
+- **Docker** — Multi-stage builds, Docker Compose (dev/prod)
+- **GitHub Actions** — CI/CD pipeline with Trivy scanning
+- **Prometheus + Grafana** — Application and infrastructure observability
+- **Node.js / Express** — Backend API with JWT auth
+- **PostgreSQL (Neon)** — Managed database
 
 ---
 
-# ⭐ Author
-
-**Gerard Eklu** — DevOps & Cloud Engineer
-
----
-
-# 📄 License
-
-MIT
+**Author:** [Gerard Eklu](https://github.com/gerardinhoo)
