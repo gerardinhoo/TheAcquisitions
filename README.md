@@ -2,14 +2,15 @@
 
 ## Overview
 
-End-to-end cloud deployment of a containerized Node.js API on AWS — from GitHub push to production behind an Application Load Balancer with HTTPS. Automated CI/CD pipeline with DevSecOps, full observability stack, and secure infrastructure.
+End-to-end cloud deployment of a containerized Node.js API on AWS. GitHub Actions CI/CD pipeline builds, tests, scans, and pushes Docker images to ECR, with production deployment to ECS Fargate behind an Application Load Balancer. Terraform-provisioned infrastructure with full observability stack.
 
-- CI/CD pipeline via **GitHub Actions** (build → test → scan → push → deploy)
-- Docker containerization with **Trivy** vulnerability scanning
-- Production deployment to **Amazon Linux EC2** behind an **AWS ALB**
+- CI/CD pipeline via **GitHub Actions** (build → test → scan → push to ECR)
+- Docker containerization with **Trivy** vulnerability scanning (fails on CRITICAL/HIGH)
+- Production deployment to **ECS Fargate** behind an **AWS ALB**
+- Infrastructure provisioned with **Terraform** (VPC, ALB, ECS, ECR, IAM, CloudWatch)
 - Observability with **Prometheus + Grafana** (custom app metrics)
 - PostgreSQL on **Neon.tech**, API docs via **Swagger / OpenAPI**
-- Container images stored in **Amazon ECR**
+- Container images stored in **Amazon ECR** with commit SHA tagging
 
 ---
 
@@ -327,9 +328,10 @@ https://<ALB_DNS>/api/docs
 
 ## Technologies
 
-- **AWS** — EC2, ALB, ECR, Target Groups, Security Groups
+- **AWS** — ECS Fargate, ALB, ECR, IAM, CloudWatch Logs, VPC, Security Groups
+- **Terraform** — Infrastructure as Code (VPC, ALB, ECS, ECR, IAM)
 - **Docker** — Multi-stage builds, Docker Compose (dev/prod)
-- **GitHub Actions** — CI/CD pipeline with Trivy scanning
+- **GitHub Actions** — CI/CD pipeline with Trivy scanning, ECR push
 - **Prometheus + Grafana** — Application and infrastructure observability
 - **Node.js / Express** — Backend API with JWT auth
 - **PostgreSQL (Neon)** — Managed database
